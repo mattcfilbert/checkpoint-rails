@@ -1,50 +1,28 @@
-class ArtistsController < ApplicationController
+class PostsController < ApplicationController
   # index
   def index
-    @artists = Artist.all
+    @posts = Post.all
   end
 
   # new
   def new
-    @artist = Artist.new
+    @post = Post.new
   end
 
   # create
   def create
-    @artist = Artist.create!(artist_params)
+    @post = Post.create!(post_params)
 
-    redirect_to artist_path(@artist)
+    redirect_to post_path(@post)
   end
 
   #show
   def show
-    @artist = Artist.find(params[:id])
-  end
-
-  # edit
-  def edit
-    @artist = Artist.find(params[:id])
-  end
-
-
-  # update
-  def update
-    @artist = Artist.find(params[:id])
-    @artist.update(artist_params)
-
-    redirect_to artist_path(@artist)
-  end
-
-  # destroy
-  def destroy
-    @artist = Artist.find(params[:id])
-    @artist.destroy
-
-    redirect_to artists_path
+    @post = Post.find(params[:id])
   end
 
   private
-  def artist_params
+  def post_params
     params.require(:post).permit(:content, :is_published)
   end
 end
